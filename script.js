@@ -6,10 +6,10 @@ const cartItemsContainer = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
 const cartCounter = document.getElementById("cart-count");
 const addressInput = document.getElementById("address");
-/*const nameInput = document.getElementById("name-input");*/
+const nameInput = document.getElementById("name-input");
 const checkoutBtn = document.getElementById("checkout-btn");
 const alertAddress = document.getElementById("address-warn");
-/*const alertName = document.getElementById("name-warn");*/
+const alertName = document.getElementById("name-warn");
 
 
 let cart = [];
@@ -24,6 +24,7 @@ cartBtn.addEventListener('click', () => {
 closeModalBtn.addEventListener('click', () => {
     modal.style.display = "none";
     addressInput.value = "";
+    nameInput.value = "";
 })
 
 //FECHAR MODAL AO CLICAR FORA
@@ -32,6 +33,10 @@ modal.addEventListener('click', function (event) {
         modal.style.display = "none";
     }
 })
+
+
+
+
 
 menu.addEventListener('click', function (event) {
     let parentButton = event.target.closest(".add-to-cart-btn");
@@ -44,6 +49,15 @@ menu.addEventListener('click', function (event) {
         addToCart(name, price);
     }
 })
+
+
+
+
+
+
+
+
+
 
 
 //Função para adicionar no carrinho
@@ -64,6 +78,13 @@ function addToCart(name, price) {
     updateCartModal();
 
 }
+
+
+
+
+
+
+
 
 //Atualizar carrinho
 function updateCartModal() {
@@ -101,6 +122,12 @@ function updateCartModal() {
     cartCounter.innerText = cart.length;
 }
 
+
+
+
+
+
+
 //Função para remover item do carrinho
 cartItemsContainer.addEventListener('click', (event) => {
     if (event.target.classList.contains("remove-btn")) {
@@ -109,6 +136,15 @@ cartItemsContainer.addEventListener('click', (event) => {
         removeCartItem(name);
     }
 })
+
+
+
+
+
+
+
+
+
 
 function removeCartItem(name) {
     const index = cart.findIndex(item => item.name === name);
@@ -128,6 +164,20 @@ function removeCartItem(name) {
     }
 }
 
+
+
+
+
+nameInput.addEventListener("input", (event) => {
+    let inputValue = event.target.value;
+
+    if (inputValue !== "") {
+        nameInput.classList.remove("border-red-500");
+        alertName.classList.add("hidden");
+    }
+})
+
+
 addressInput.addEventListener("input", (event) => {
     let inputValue = event.target.value;
 
@@ -136,6 +186,11 @@ addressInput.addEventListener("input", (event) => {
         alertAddress.classList.add("hidden");
     }
 })
+
+
+
+
+
 
 checkoutBtn.addEventListener('click', () => {
 
@@ -157,6 +212,12 @@ checkoutBtn.addEventListener('click', () => {
 
     if (cart.length === 0) return;
 
+    if (nameInput.value === "") {
+        alertName.classList.remove("hidden");
+        nameInput.classList.add("border-red-500");
+        return;
+    }
+
     if (addressInput.value === "") {
         alertAddress.classList.remove("hidden");
         addressInput.classList.add("border-red-500");
@@ -174,12 +235,20 @@ checkoutBtn.addEventListener('click', () => {
     const message = encodeURIComponent(cartItems);
     const phone = "+5587981772959";
 
-    window.open(`https://wa.me/${phone}?text=${message}\n\nEndereço: ${addressInput.value}`, "_blank");
+    window.open(`https://wa.me/${phone}?text=${message}Nome do cliente: ${nameInput.value}%0AEndereço: ${addressInput.value}`, "_blank");
 
     cart = [];
     addressInput.value = "";
+    nameInput.value = "";
     updateCartModal();
 })
+
+
+
+
+
+
+
 
 
 function checkHours() {
@@ -187,6 +256,7 @@ function checkHours() {
     const hora = data.getHours();
     return hora >= 18 && hora < 22; //true = restaurante aberto;
 }
+
 
 const spanItem = document.getElementById("date-span");
 const isOpen = checkHours();

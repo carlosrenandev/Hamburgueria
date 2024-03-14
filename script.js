@@ -137,7 +137,7 @@ adressInput.addEventListener("input", (event) => {
 
 checkoutBtn.addEventListener('click', () => {
 
-    /*const isOpen = checkHours();
+    const isOpen = checkHours();
     if (!isOpen) {
         Toastify({
             text: "Ops o restaurante está fechado!",
@@ -151,7 +151,7 @@ checkoutBtn.addEventListener('click', () => {
             },
         }).showToast();
         return;
-    }*/
+    }
 
     if (cart.length === 0) return;
 
@@ -185,7 +185,7 @@ function checkHours() {
     return hora >= 18 && hora < 22; //true = restaurante aberto;
 }
 
-/*const spanItem = document.getElementById("date-span");
+const spanItem = document.getElementById("date-span");
 const isOpen = checkHours();
 
 if (isOpen) {
@@ -194,4 +194,4 @@ if (isOpen) {
 } else {
     spanItem.classList.add("bg-red-500");
     spanItem.classList.remove("bg-green-700");
-}*/
+}

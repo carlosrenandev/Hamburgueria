@@ -5,9 +5,11 @@ const closeModalBtn = document.getElementById('close-modal-btn');
 const cartItemsContainer = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
 const cartCounter = document.getElementById("cart-count");
-const adressInput = document.getElementById("address");
+const addressInput = document.getElementById("address");
+/*const nameInput = document.getElementById("name-input");*/
 const checkoutBtn = document.getElementById("checkout-btn");
-const alertAddress = document.getElementById("adress-warn");
+const alertAddress = document.getElementById("address-warn");
+/*const alertName = document.getElementById("name-warn");*/
 
 
 let cart = [];
@@ -21,7 +23,7 @@ cartBtn.addEventListener('click', () => {
 //FECHAR MODAL AO CLICAR NO BOTÃO FECHAR
 closeModalBtn.addEventListener('click', () => {
     modal.style.display = "none";
-    adressInput.value = "";
+    addressInput.value = "";
 })
 
 //FECHAR MODAL AO CLICAR FORA
@@ -126,55 +128,56 @@ function removeCartItem(name) {
     }
 }
 
-adressInput.addEventListener("input", (event) => {
+addressInput.addEventListener("input", (event) => {
     let inputValue = event.target.value;
 
     if (inputValue !== "") {
-        adressInput.classList.remove("border-red-500");
+        addressInput.classList.remove("border-red-500");
         alertAddress.classList.add("hidden");
     }
 })
 
 checkoutBtn.addEventListener('click', () => {
 
-    const isOpen = checkHours();
+    /*const isOpen = checkHours();
     if (!isOpen) {
         Toastify({
             text: "Ops o restaurante está fechado!",
             duration: 3000,
             close: true,
-            gravity: "top", // `top` or `bottom`
-            position: "right", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
+            gravity: "top", 
+            position: "right", 
+            stopOnFocus: true, 
             style: {
                 background: "#ef4444",
             },
         }).showToast();
         return;
-    }
+    }*/
 
     if (cart.length === 0) return;
 
-    if (adressInput.value === "") {
+    if (addressInput.value === "") {
         alertAddress.classList.remove("hidden");
-        adressInput.classList.add("border-red-500");
+        addressInput.classList.add("border-red-500");
         return;
     }
+
 
     //ENVIAR PEDIDO PARA WHATSAPP
     const cartItems = cart.map((item) => {
         return (
-            `${item.name} Quantidade: (${item.quantity}) Preço: R$ ${item.price} |`
+            `${item.name}\nQuantidade: (${item.quantity})\n\n`
         )
     }).join("")
 
     const message = encodeURIComponent(cartItems);
     const phone = "87981772959";
 
-    window.open(`https://wa.me/${phone}?text=${message} Endereço: ${adressInput.value}`, "_blank");
+    window.open(`https://wa.me/${phone}?text=${message}\n\nEndereço: ${addressInput.value}`, "_blank");
 
     cart = [];
-    adressInput.value = "";
+    addressInput.value = "";
     updateCartModal();
 })
 

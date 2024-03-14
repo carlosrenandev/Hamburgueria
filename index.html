@@ -42,14 +42,14 @@
                     src="./assets/IMG/hamb-1.png" alt="hamburguer1">
 
                 <div>
-                    <p class="font-bold">Hambuguer Smah</p>
+                    <p class="font-bold">Hambúrguer Smah</p>
                     <p class="text-sm">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti ea fugit
                         voluptatem corrupti.</p>
 
 
                     <div class="flex items-center justify-between mt-3">
                         <p class="font-bold text-lg">R$ 25,00</p>
-                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Hamburguer Smash"
+                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Hambúrguer Smash"
                             data-price="25">
                             <i class="fa fa-cart-plus text-lg text-white"></i>
                         </button>
@@ -65,14 +65,14 @@
                     src="./assets/IMG/hamb-2.png" alt="hamburguer1">
 
                 <div>
-                    <p class="font-bold">Hambuguer Duplo</p>
+                    <p class="font-bold">Hambúrguer Duplo</p>
                     <p class="text-sm">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti ea fugit
                         voluptatem corrupti.</p>
 
 
                     <div class="flex items-center justify-between mt-3">
                         <p class="font-bold text-lg">R$ 35,00</p>
-                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Hamburguer Duplo"
+                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Hambúrguer Duplo"
                             data-price="35">
                             <i class="fa fa-cart-plus text-lg text-white"></i>
                         </button>
@@ -89,14 +89,14 @@
                     src="./assets/IMG/hamb-3.png" alt="hamburguer1">
 
                 <div>
-                    <p class="font-bold">Hambuguer Salada</p>
+                    <p class="font-bold">Hambúrguer Salada</p>
                     <p class="text-sm">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti ea fugit
                         voluptatem corrupti.</p>
 
 
                     <div class="flex items-center justify-between mt-3">
                         <p class="font-bold text-lg">R$ 25,50</p>
-                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Hamburguer Salada"
+                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Hambúrguer Salada"
                             data-price="25.50">
                             <i class="fa fa-cart-plus text-lg text-white"></i>
                         </button>
@@ -112,14 +112,14 @@
                     src="./assets/IMG/hamb-4.png" alt="hamburguer1">
 
                 <div>
-                    <p class="font-bold">Hambuguer Duplo</p>
+                    <p class="font-bold">Hambúrguer Duplo</p>
                     <p class="text-sm">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti ea fugit
                         voluptatem corrupti.</p>
 
 
                     <div class="flex items-center justify-between mt-3">
                         <p class="font-bold text-lg">R$ 40,00</p>
-                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Hamburguer Bacon"
+                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Hambúrguer Bacon"
                             data-price="40">
                             <i class="fa fa-cart-plus text-lg text-white"></i>
                         </button>
@@ -165,12 +165,12 @@
                     src="./assets/IMG/refri-2.png" alt="hamburguer1">
 
                 <div class="w-full">
-                    <p class="font-bold">Guarana lata</p>
+                    <p class="font-bold">Guaraná lata</p>
 
 
                     <div class="flex items-center justify-between mt-3">
                         <p class="font-bold text-lg">R$ 6,50</p>
-                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn ml-2" data-name="Guarana lata"
+                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn ml-2" data-name="Guaraná lata"
                             data-price="6.50">
                             <i class="fa fa-cart-plus text-lg text-white"></i>
                         </button>
@@ -188,12 +188,16 @@
 
             <div id="cart-items" class="flex flex-col justify-between mb-2"></div>
 
-            <p class="font-bold">Total: <span id="cart-total">0.00</span></p>
+            <p class="font-bold mb-3">Total: <span id="cart-total">0.00</span></p>
 
-            <p class="font-bold mt-4">Endereço de entrega:</p>
+           <!--<p class="font-bold">Nome completo:</p>
+            <input type="text" class="w-full border-2 rounded outline-none p-1" placeholder="Insira seu nome completo" id="name-input" required>
+            <p class="text-red-500 hidden" id="name-warn">Digite seu nome completo!</p>--> 
+
+            <p class="font-bold mt-2">Endereço de entrega:</p>
             <input type="text" placeholder="Digite o seu endereço completo..." id="address"
-                class="w-full border-2 p-1 rounded my-1 outline-none">
-            <p class="text-red-500 hidden" id="adress-warn">Digite seu endereço completo!</p>
+                class="w-full border-2 p-1 rounded my-1 outline-none" required>
+            <p class="text-red-500 hidden" id="address-warn">Digite seu endereço completo!</p>
 
             <div class="flex items-center justify-between mt-5 w-full">
                 <button id="close-modal-btn">Fechar</button>

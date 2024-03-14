@@ -240,6 +240,7 @@ checkoutBtn.addEventListener('click', () => {
     cart = [];
     addressInput.value = "";
     nameInput.value = "";
+    modal.style.display = "none";
     updateCartModal();
 })
 

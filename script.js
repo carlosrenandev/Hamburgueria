@@ -36,8 +36,6 @@ modal.addEventListener('click', function (event) {
 
 
 
-
-
 menu.addEventListener('click', function (event) {
     let parentButton = event.target.closest(".add-to-cart-btn");
 
@@ -49,14 +47,6 @@ menu.addEventListener('click', function (event) {
         addToCart(name, price);
     }
 })
-
-
-
-
-
-
-
-
 
 
 
@@ -78,11 +68,6 @@ function addToCart(name, price) {
     updateCartModal();
 
 }
-
-
-
-
-
 
 
 
@@ -124,10 +109,6 @@ function updateCartModal() {
 
 
 
-
-
-
-
 //Função para remover item do carrinho
 cartItemsContainer.addEventListener('click', (event) => {
     if (event.target.classList.contains("remove-btn")) {
@@ -136,13 +117,6 @@ cartItemsContainer.addEventListener('click', (event) => {
         removeCartItem(name);
     }
 })
-
-
-
-
-
-
-
 
 
 
@@ -165,9 +139,6 @@ function removeCartItem(name) {
 }
 
 
-
-
-
 nameInput.addEventListener("input", (event) => {
     let inputValue = event.target.value;
 
@@ -186,9 +157,6 @@ addressInput.addEventListener("input", (event) => {
         alertAddress.classList.add("hidden");
     }
 })
-
-
-
 
 
 
@@ -243,12 +211,6 @@ checkoutBtn.addEventListener('click', () => {
     modal.style.display = "none";
     updateCartModal();
 })
-
-
-
-
-
-
 
 
 

@@ -35,7 +35,7 @@ modal.addEventListener('click', function (event) {
 })
 
 
-
+// QUANDO EU CLICAR NO CARRINHO
 menu.addEventListener('click', function (event) {
     let parentButton = event.target.closest(".add-to-cart-btn");
 
@@ -45,6 +45,11 @@ menu.addEventListener('click', function (event) {
 
         //Adicionar no carrinho
         addToCart(name, price);
+
+        if (cart.length > 4) {
+            cartItemsContainer.style.overflow = "auto";
+            cartItemsContainer.style.height = "400px"
+        }
     }
 })
 

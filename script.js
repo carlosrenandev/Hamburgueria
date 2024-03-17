@@ -205,10 +205,18 @@ checkoutBtn.addEventListener('click', () => {
         )
     }).join("")
 
+    function totalPedido() {
+        let total = 0;
+        cart.forEach(element => {
+            total += element.price * element.quantity;
+        });
+        return total;
+    }
+    let total = totalPedido();
     const message = encodeURIComponent(cartItems);
     const phone = "+5587981772959";
 
-    window.open(`https://wa.me/${phone}?text=${message}Nome do cliente: ${nameInput.value}%0AEndereço: ${addressInput.value}`, "_blank");
+    window.open(`https://wa.me/${phone}?text=${message}Nome do cliente: ${nameInput.value}%0AEndereço: ${addressInput.value}%0AValor total do pedido: R$ ${total.toFixed(2)}`, "_blank");
 
     cart = [];
     addressInput.value = "";

@@ -49,8 +49,6 @@ menu.addEventListener('click', function (event) {
         if (cart.length > 4) {
             cartItemsContainer.style.overflow = "auto";
             cartItemsContainer.style.maxHeight = "400px"
-        } else {
-            cartItemsContainer.style.maxHeight = "";
         }
     }
 })

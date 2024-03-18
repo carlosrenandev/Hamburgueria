@@ -48,11 +48,12 @@ menu.addEventListener('click', function (event) {
 
         if (cart.length > 4) {
             cartItemsContainer.style.overflow = "auto";
-            cartItemsContainer.style.height = "400px"
+            cartItemsContainer.style.maxHeight = "400px"
+        } else {
+            cartItemsContainer.style.maxHeight = "";
         }
     }
 })
-
 
 
 //Função para adicionar no carrinho
@@ -183,7 +184,20 @@ checkoutBtn.addEventListener('click', () => {
         return;
     }*/
 
-    if (cart.length === 0) return;
+    if (cart.length === 0) {
+        Toastify({
+            text: "Por favor, adicione itens no carrinho!",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+                background: "#ef4444",
+            },
+        }).showToast();
+        return;
+    }
 
     if (nameInput.value === "") {
         alertName.classList.remove("hidden");

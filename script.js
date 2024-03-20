@@ -129,7 +129,6 @@ function removeCartItem(name) {
 
     if (index !== -1) {
         const item = cart[index];
-        console.log(item);
 
         if (item.quantity > 1) {
             item.quantity -= 1;

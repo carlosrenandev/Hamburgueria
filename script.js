@@ -12,7 +12,6 @@ const inputBairro = document.getElementById("inputBairro");
 const inputCidade = document.getElementById("inputCidade")
 const inputNumero = document.getElementById("inputNumero");
 const checkoutBtn = document.getElementById("checkout-btn");
-const paymentMethod = document.getElementById("payment-method");
 
 let cart = [];
 
@@ -278,21 +277,6 @@ checkoutBtn.addEventListener("click", () => {
     return;
   }
 
-  if (paymentMethod.value === "") {
-    Toastify({
-      text: "Por favor, preencha todos os campos!",
-      duration: 3000,
-      close: true,
-      gravity: "top",
-      position: "right",
-      stopOnFocus: true,
-      style: {
-        background: "#ef4444",
-      },
-    }).showToast();
-    return;
-  }
-
   //ENVIAR PEDIDO PARA WHATSAPP
   const cartItems = cart
     .map((item) => {
@@ -313,7 +297,7 @@ checkoutBtn.addEventListener("click", () => {
 
   window.open(
     `https://wa.me/${phone}?text=${message}Nome do cliente: ${nameInput.value
-    }%0AEndereço: Rua: ${inputRua.value} | Bairro: ${inputBairro.value} ${inputCidade.value} | Numero: ${inputNumero.value}%0AMétodo de pagamento: ${paymentMethod.value}%0AValor total do pedido: R$ ${total.toFixed(2)}`,
+    }%0AEndereço: Rua: ${inputRua.value} | Bairro: ${inputBairro.value} ${inputCidade.value} | Numero: ${inputNumero.value}%0A%0AValor total do pedido: R$ ${total.toFixed(2)}`,
     "_blank"
   );
 
@@ -324,7 +308,6 @@ checkoutBtn.addEventListener("click", () => {
   inputBairro.value = "";
   inputCidade.value = "";
   inputNumero.value = "";
-  paymentMethod.value = "";
   inputRua.disabled = false;
   inputBairro.disabled = false;
   inputCidade.disabled = false;

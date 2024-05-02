@@ -12,6 +12,7 @@ const inputBairro = document.getElementById("inputBairro");
 const inputCidade = document.getElementById("inputCidade")
 const inputNumero = document.getElementById("inputNumero");
 const checkoutBtn = document.getElementById("checkout-btn");
+const paymentMethod = document.getElementById("payment-method");
 
 let cart = [];
 
@@ -297,7 +298,7 @@ checkoutBtn.addEventListener("click", () => {
 
   window.open(
     `https://wa.me/${phone}?text=${message}Nome do cliente: ${nameInput.value
-    }%0AEndereço: Rua: ${inputRua.value} | Bairro: ${inputBairro.value} ${inputCidade.value} | Número: ${inputNumero.value}%0AValor total do pedido: R$ ${total.toFixed(2)}`,
+    }%0AEndereço: Rua: ${inputRua.value} | Bairro: ${inputBairro.value} ${inputCidade.value} | Número: ${inputNumero.value}%0AValor total do pedido: R$ ${total.toFixed(2)}%0AMétodo de pagamento: ${paymentMethod.value}`,
     "_blank"
   );
 

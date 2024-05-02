@@ -46,9 +46,14 @@ menu.addEventListener("click", function (event) {
     //Adicionar no carrinho
     addToCart(name, price);
 
-    if (cart.length >= 2) {
+    if (cart.length >= 2 && window.innerWidth <= 400) {
       cartItemsContainer.style.overflow = "auto";
       cartItemsContainer.style.maxHeight = "120px";
+    }
+
+    if (cart.length >= 5 && window.innerWidth > 1068) {
+      cartItemsContainer.style.overflow = "auto";
+      cartItemsContainer.style.maxHeight = "400px";
     }
   }
 });
@@ -294,7 +299,7 @@ checkoutBtn.addEventListener("click", () => {
   }
   let total = totalPedido();
   const message = encodeURIComponent(cartItems);
-  const phone = "+5587981772959";
+  const phone = "+558791166845";
 
   window.open(
     `https://wa.me/${phone}?text=${message}Nome do cliente: ${nameInput.value

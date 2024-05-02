@@ -46,7 +46,7 @@ menu.addEventListener("click", function (event) {
     //Adicionar no carrinho
     addToCart(name, price);
 
-    if (cart.length >= 3) {
+    if (cart.length >= 2) {
       cartItemsContainer.style.overflow = "auto";
       cartItemsContainer.style.maxHeight = "120px";
     }

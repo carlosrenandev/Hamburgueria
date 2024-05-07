@@ -58,6 +58,21 @@ menu.addEventListener("click", function (event) {
   }
 });
 
+paymentMethod.addEventListener("input", () => {
+  calcularTroco();
+})
+
+//FUNÇÃO CALCULAR TROCO
+function calcularTroco() {
+  const troco = document.getElementById("inputTroco");
+
+  if(paymentMethod.value = "Dinheiro") {
+    troco.classList.remove("hidden");
+  } else {
+    troco.classList.add("hidden");
+  }
+}
+
 //FUNCAO PARA BUSCAR O DADOS DO CEP
 function buscarCep() {
   var url = "https://viacep.com.br/ws/" + inputCep.value + "/json/";
@@ -299,7 +314,7 @@ checkoutBtn.addEventListener("click", () => {
   }
   let total = totalPedido();
   const message = encodeURIComponent(cartItems);
-  const phone = "+558791166845";
+  const phone = "+5587981772959";
 
   window.open(
     `https://wa.me/${phone}?text=${message}Nome do cliente: ${nameInput.value

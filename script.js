@@ -12,7 +12,6 @@ const inputBairro = document.getElementById("inputBairro");
 const inputCidade = document.getElementById("inputCidade")
 const inputNumero = document.getElementById("inputNumero");
 const checkoutBtn = document.getElementById("checkout-btn");
-const paymentMethod = document.getElementById("payment-method");
 
 let cart = [];
 
@@ -57,70 +56,6 @@ menu.addEventListener("click", function (event) {
     }
   }
 });
-
-paymentMethod.addEventListener("input", () => {
-  calcularTroco();
-})
-
-//FUNÇÃO CALCULAR TROCO
-function calcularTroco() {
-  const troco = document.getElementById("inputTroco");
-
-  if(paymentMethod.value = "Dinheiro") {
-    troco.classList.remove("hidden");
-  } else {
-    troco.classList.add("hidden");
-  }
-}
-
-//FUNCAO PARA BUSCAR O DADOS DO CEP
-function buscarCep() {
-  var url = "https://viacep.com.br/ws/" + inputCep.value + "/json/";
-
-  if (inputCep.value !== "") {
-    fetch(url)
-      .then((res) => {
-        if (res.ok) {
-          res.json()
-            .then((data) => {
-              inputRua.value = data.logradouro;
-              inputBairro.value = data.bairro;
-              inputCidade.value = data.localidade;
-              inputRua.disabled = true;
-              inputBairro.disabled = true;
-              inputCidade.disabled = true;
-            })
-        }
-      })
-      .catch((error) => {
-        Toastify({
-          text: "CEP Inválido!",
-          duration: 3000,
-          close: true,
-          gravity: "top",
-          position: "right",
-          stopOnFocus: true,
-          style: {
-            background: "#ef4444",
-          },
-        }).showToast();
-        inputRua.value = "";
-        inputBairro.value = "";
-        inputCidade.value = "";
-        inputRua.disabled = false;
-        inputBairro.disabled = false;
-        inputCidade.disabled = false;
-      })
-  } else {
-    inputRua.value = "";
-    inputBairro.value = "";
-    inputCidade.value = "";
-    inputRua.disabled = false;
-    inputBairro.disabled = false;
-    inputCidade.disabled = false;
-  }
-}
-inputCep.addEventListener("blur", buscarCep);
 
 //Função para adicionar no carrinho
 function addToCart(name, price) {
@@ -207,6 +142,56 @@ function removeCartItem(name) {
   }
 }
 
+//FUNCAO PARA BUSCAR O DADOS DO CEP
+function buscarCep() {
+  var url = "https://viacep.com.br/ws/" + inputCep.value + "/json/";
+
+  if (inputCep.value !== "") {
+    fetch(url)
+      .then((res) => {
+        if (res.ok) {
+          res.json()
+            .then((data) => {
+              inputRua.value = data.logradouro;
+              inputBairro.value = data.bairro;
+              inputCidade.value = data.localidade;
+              inputRua.disabled = true;
+              inputBairro.disabled = true;
+              inputCidade.disabled = true;
+            })
+        }
+      })
+      .catch((error) => {
+        Toastify({
+          text: "CEP Inválido!",
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: "#ef4444",
+          },
+        }).showToast();
+        inputRua.value = "";
+        inputBairro.value = "";
+        inputCidade.value = "";
+        inputRua.disabled = false;
+        inputBairro.disabled = false;
+        inputCidade.disabled = false;
+      })
+  } else {
+    inputRua.value = "";
+    inputBairro.value = "";
+    inputCidade.value = "";
+    inputRua.disabled = false;
+    inputBairro.disabled = false;
+    inputCidade.disabled = false;
+  }
+}
+inputCep.addEventListener("blur", buscarCep);
+
+//QUANDO CLICA NO BOTÃO DE COMPLETAR A COMPRA
 checkoutBtn.addEventListener("click", () => {
   if (cart.length === 0) {
     Toastify({
@@ -318,7 +303,7 @@ checkoutBtn.addEventListener("click", () => {
 
   window.open(
     `https://wa.me/${phone}?text=${message}Nome do cliente: ${nameInput.value
-    }%0AEndereço: Rua: ${inputRua.value} | Bairro: ${inputBairro.value} ${inputCidade.value} | Número: ${inputNumero.value}%0AValor total do pedido: R$ ${total.toFixed(2)}%0AMétodo de pagamento: ${paymentMethod.value}`,
+    }%0AEndereço: Rua: ${inputRua.value} | Bairro: ${inputBairro.value} ${inputCidade.value} | Número: ${inputNumero.value}%0AValor total do pedido: R$ ${total.toFixed(2)}`,
     "_blank"
   );
 

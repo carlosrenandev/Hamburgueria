@@ -303,7 +303,7 @@ checkoutBtn.addEventListener("click", () => {
 
   window.open(
     `https://wa.me/${phone}?text=${message}Nome do cliente: ${nameInput.value
-    }%0AEndereço: Rua: ${inputRua.value} | Bairro: ${inputBairro.value} ${inputCidade.value} | Número: ${inputNumero.value}%0AValor total do pedido: R$ ${total.toFixed(2)}`,
+    }%0AEndereço: ${inputRua.value} | Bairro: ${inputBairro.value} ${inputCidade.value} | Número: ${inputNumero.value}%0AValor total do pedido: R$ ${total.toFixed(2)}`,
     "_blank"
   );
 

@@ -503,7 +503,7 @@ checkoutBtn.addEventListener("click", () => {
     const dataAtual = `${dia}/${mes}/${ano} ${hora}:${minutos}`
 
     window.open(
-      `https://wa.me/${phone}?text=Novo Pedido%0A%0APedido feito em: ${dataAtual}%0A%0A${message}Nome do cliente: ${nameInput.value
+      `https://wa.me/${phone}?text=Novo Pedido - Para entregar%0A%0APedido feito em: ${dataAtual}%0A%0A${message}Nome do cliente: ${nameInput.value
       }%0ATelefone: ${telInput.value}%0AEndereço: ${inputRua.value} | Bairro: ${inputBairro.value} | Número: ${inputNumero.value}%0AValor total do pedido: R$ ${total.toFixed(2)}%0AMétodo de pagamento: ${paymentMethod.value}`,
       "_blank"
     );
@@ -521,6 +521,7 @@ checkoutBtn.addEventListener("click", () => {
   inputBairro.disabled = false;
   inputCidade.disabled = false;
   modal.style.display = "none";
+  body.classList.remove('overflow-hidden');
   updateCartModal();
   buscarCep();
 });

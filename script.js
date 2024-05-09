@@ -183,6 +183,10 @@ menu.addEventListener("click", function (event) {
       cartItemsContainer.style.overflow = "auto";
       cartItemsContainer.style.maxHeight = "300px";
     }
+    if (cart.length >= 2 && window.innerHeight < 650) {
+      cartItemsContainer.style.overflow = "auto";
+      cartItemsContainer.style.maxHeight = "50px";
+    }
   }
 });
 

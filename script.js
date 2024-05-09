@@ -80,7 +80,7 @@ menu.addEventListener("click", function (event) {
       cartItemsContainer.style.maxHeight = "300px";
     } else if (cart.length >= 2 && window.innerWidth < 680) {
       cartItemsContainer.style.overflow = "auto";
-      cartItemsContainer.style.maxHeight = "220px";
+      cartItemsContainer.style.maxHeight = "100px";
     }
 
     //Adicionar no carrinho

@@ -380,6 +380,26 @@
         <option value="Dinheiro">Dinheiro</option>
       </select>
 
+      <button class="bg-[#222] mt-5 p-2 text-white rounded hidden" id="entregaBtn">
+        <p>Adicionar endereço de entrega</p>
+      </button>
+
+      <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden" id="modalMobile">
+        <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
+          <h2 class="text-center font-medium mb-4 text-lg">Endereço de entrega</h2>
+
+          <div class="grid grid-cols-1 gap-2">
+            <input type="number" placeholder="Digite o seu CEP" id="inputCep"
+              class="border-2 p-1 rounded outline-none" />
+            <input class="border-2 p-2 rounded outline-none" type="text" placeholder="Rua" id="inputRua">
+            <input class="border-2 p-2 rounded outline-none" type="text" placeholder="Bairro" id="inputBairro">
+            <input class="border-2 p-2 rounded outline-none" type="text" placeholder="Cidade" id="inputCidade">
+            <input class="border-2 p-2 rounded outline-none" type="text" placeholder="Número" id="inputNumero">
+          </div>
+          <button class="w-full bg-green-500 mt-4 p-2 text-white font-medium text-lg rounded" id="btnMobileEntrega">CONFIRMAR</button>
+        </div>
+      </div>
+
       <div class="hidden" id="endereco-div">
         <p class="font-bold mt-2">Endereço de entrega:</p>
 

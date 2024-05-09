@@ -17,6 +17,9 @@ const inputCidade = document.getElementById("inputCidade")
 const inputNumero = document.getElementById("inputNumero");
 const checkoutBtn = document.getElementById("checkout-btn");
 const paymentMethod = document.getElementById("paymentMethod");
+const entregaBtnMobile = document.getElementById("entregaBtn");
+const modalMobile = document.getElementById("modalMobile");
+const btnMobileEntrega = document.getElementById("btnMobileEntrega");
 
 let cart = [];
 
@@ -39,10 +42,104 @@ modal.addEventListener("click", function (event) {
   }
 });
 
-//QUANDO O INPUT DE ENTREGA ESTIVER CHECKED
+modalMobile.addEventListener("click", function (event) {
+  if (event.target === modalMobile) {
+    modalMobile.style.display = "none";
+  }
+});
+
+entregaBtnMobile.addEventListener("click", () => {
+  modalMobile.style.display = "flex";
+})
+
+btnMobileEntrega.addEventListener("click", () => {
+  if (inputCep.value === "") {
+    Toastify({
+      text: "Por favor, preencha todos os campos!",
+      duration: 3000,
+      close: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "#ef4444",
+      },
+    }).showToast();
+    return;
+  }
+
+  if (inputRua.value === "") {
+    Toastify({
+      text: "Por favor, preencha todos os campos!",
+      duration: 3000,
+      close: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "#ef4444",
+      },
+    }).showToast();
+    return;
+  }
+
+  if (inputBairro.value === "") {
+    Toastify({
+      text: "Por favor, preencha todos os campos!",
+      duration: 3000,
+      close: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "#ef4444",
+      },
+    }).showToast();
+    return;
+  }
+
+  if (inputCidade.value === "") {
+    Toastify({
+      text: "Por favor, preencha todos os campos!",
+      duration: 3000,
+      close: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "#ef4444",
+      },
+    }).showToast();
+    return;
+  }
+
+  if (inputNumero.value === "") {
+    Toastify({
+      text: "Por favor, preencha todos os campos!",
+      duration: 3000,
+      close: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "#ef4444",
+      },
+    }).showToast();
+    return;
+  }
+
+  modalMobile.style.display = "none";
+})
+
+//QUANDO O INPUT DE ENTREGA ESTIVER CHECKED E A TELA MAIOR QUE 680 PX
 inputRadioEntrega.addEventListener("change", () => {
-  if (inputRadioEntrega.checked) {
+  if (inputRadioEntrega.checked && window.innerWidth < 680) {
+    entregaBtnMobile.classList.remove('hidden');
+    enderecoDiv.classList.add('hidden');
+  }
+  if (inputRadioEntrega.checked && window.innerWidth > 680) {
     enderecoDiv.classList.remove('hidden');
+    entregaBtnMobile.classList.add('hidden');
   }
 })
 
@@ -80,11 +177,14 @@ menu.addEventListener("click", function (event) {
 
     if (cart.length >= 2 && window.innerWidth < 640) {
       cartItemsContainer.style.overflow = "auto";
-      cartItemsContainer.style.maxHeight = "100px";
+      cartItemsContainer.style.maxHeight = "220px";
     }
     if (cart.length >= 4 && window.innerWidth > 640) {
       cartItemsContainer.style.overflow = "auto";
       cartItemsContainer.style.maxHeight = "220px";
+    }
+    if (window.innerWidth < 640) {
+
     }
   }
 });
@@ -311,7 +411,7 @@ checkoutBtn.addEventListener("click", () => {
 
     if (inputCep.value === "") {
       Toastify({
-        text: "Por favor, preencha todos os campos!",
+        text: "Por favor, preencha todos os campos de endereço!",
         duration: 3000,
         close: true,
         gravity: "top",
@@ -326,7 +426,7 @@ checkoutBtn.addEventListener("click", () => {
 
     if (inputRua.value === "") {
       Toastify({
-        text: "Por favor, preencha todos os campos!",
+        text: "Por favor, preencha todos os campos de endereço!",
         duration: 3000,
         close: true,
         gravity: "top",
@@ -341,7 +441,7 @@ checkoutBtn.addEventListener("click", () => {
 
     if (inputBairro.value === "") {
       Toastify({
-        text: "Por favor, preencha todos os campos!",
+        text: "Por favor, preencha todos os campos de endereço!",
         duration: 3000,
         close: true,
         gravity: "top",
@@ -356,7 +456,7 @@ checkoutBtn.addEventListener("click", () => {
 
     if (inputCidade.value === "") {
       Toastify({
-        text: "Por favor, preencha todos os campos!",
+        text: "Por favor, preencha todos os campos de endereço!",
         duration: 3000,
         close: true,
         gravity: "top",
@@ -371,7 +471,7 @@ checkoutBtn.addEventListener("click", () => {
 
     if (inputNumero.value === "") {
       Toastify({
-        text: "Por favor, preencha todos os campos!",
+        text: "Por favor, preencha todos os campos de endereço!",
         duration: 3000,
         close: true,
         gravity: "top",

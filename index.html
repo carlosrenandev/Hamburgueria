@@ -26,10 +26,10 @@
       23:30</span>
 
     <div class="flex gap-10 mt-6">
-      <a class="w-[30px]" href="https://www.instagram.com/bravusburguerpnz/" target="_blank"><img class="hover:scale-125 duration-200"
-          src="./assets/IMG/instagram.png" alt="instagram" /></a>
-      <a class="w-[30px]" href="https://api.whatsapp.com/message/57TR3UUUFENYB1?autoload=1&app_absent=0" target="_blank"><img class="hover:scale-125 duration-200"
-          src="./assets/IMG/WhatsApp.png" alt="instagram" /></a>
+      <a class="w-[30px]" href="https://www.instagram.com/bravusburguerpnz/" target="_blank"><img
+          class="hover:scale-125 duration-200" src="./assets/IMG/instagram.png" alt="instagram" /></a>
+      <a class="w-[30px]" href="https://api.whatsapp.com/message/57TR3UUUFENYB1?autoload=1&app_absent=0"
+        target="_blank"><img class="hover:scale-125 duration-200" src="./assets/IMG/WhatsApp.png" alt="instagram" /></a>
     </div>
   </header>
 
@@ -355,9 +355,20 @@
     <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
       <h2 class="text-center font-bold text-2xl mb-2">Meu carrinho</h2>
 
-      <div id="cart-items" class="flex flex-col justify-between mb-2"></div>
+      <div class="mt-4 w-full hidden" id="teste">
+        <button class="bg-gray-800 w-full rounded p-2 text-white" id="btnProdutos">Ver meu carrinho</button>
+      </div>
 
-      <p class="font-bold mb-3">Total: <span id="cart-total">0.00</span></p>
+      <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden" id="modalCompras">
+        <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
+          <p class="text-center text-xl font-medium">Meu carrinho</p>
+          <div id="cart-items" class="flex flex-col justify-between mb-2"></div>
+          <button class="bg-red-700 w-full text-white rounded text-base p-2" id="voltarCarrinho">Voltar</button>
+        </div>
+      </div>
+
+
+      <p class="font-bold mt-2 mb-3">Total: <span id="cart-total">0.00</span></p>
 
       <p class="font-bold">Nome:</p>
       <input type="text" class="w-full border-2 rounded outline-none p-1 mb-2" placeholder="Insira seu nome"
@@ -382,7 +393,7 @@
       </select>
 
       <div class="mt-5 hidden" id="entregaBtn">
-        <button class="bg-[#222] text-white p-2 rounded w-full">Adicionar endereço de entrega</button>
+        <button class="bg-gray-800 text-white p-2 rounded w-full">Adicionar endereço de entrega</button>
       </div>
 
       <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden"
@@ -417,7 +428,7 @@
 
   <footer class="w-full bg-[#fed313] py-3 fixed bottom-0 z-[40] flex items-center justify-center">
     <button class="flex items-center gap-2 text-black font-bold" id="cart-btn">
-      (<span id="cart-count">0</span>) Veja meu carrinho
+      (<span id="cart-count">0</span>) Ver meu carrinho
       <i class="fa fa-cart-plus text-lg text-black"></i>
     </button>
   </footer>

@@ -19,6 +19,9 @@ const checkoutBtn = document.getElementById("checkout-btn");
 const entregaBtnMobile = document.getElementById("entregaBtn");
 const modalMobile = document.getElementById("modalMobile");
 const btnMobileEntrega = document.getElementById("btnMobileEntrega");
+const btnProdutos = document.getElementById("btnProdutos");
+const modalCompras = document.getElementById("modalCompras");
+const btnvoltarCarrinho = document.getElementById("voltarCarrinho");
 
 let cart = [];
 
@@ -164,8 +167,27 @@ telInput.addEventListener("input", () => {
   }
 })
 
+//QUANDO APERTAR PRA VOLTAR NO CARRINHO DE COMPRAS
+btnvoltarCarrinho.addEventListener("click", () => {
+  modalCompras.style.display = 'none';
+})
+
+//QUANDO CLICAR PARA VER ITENS NO CARRINHO
+btnProdutos.addEventListener("click", () => {
+  modalCompras.style.display = 'flex';
+})
+
+//FECHAR MODAL DE COMPRAS AO CLICAR FORA
+modalCompras.addEventListener("click", function (event) {
+  if (event.target === modalCompras) {
+    modalCompras.style.display = "none";
+  }
+});
+
 // QUANDO EU CLICAR NO CARRINHO
 menu.addEventListener("click", function (event) {
+  document.getElementById("teste").classList.remove("hidden")
+
   let parentButton = event.target.closest(".add-to-cart-btn");
 
   if (parentButton) {
@@ -175,17 +197,9 @@ menu.addEventListener("click", function (event) {
     //Adicionar no carrinho
     addToCart(name, price);
 
-    if (cart.length >= 2 && window.innerHeight < 900) {
+    if (cart.length >= 5 && window.innerHeight < 900) {
       cartItemsContainer.style.overflow = "auto";
-      cartItemsContainer.style.maxHeight = "200px";
-    }
-    if (cart.length >= 4 && window.innerHeight > 900) {
-      cartItemsContainer.style.overflow = "auto";
-      cartItemsContainer.style.maxHeight = "300px";
-    }
-    if (cart.length >= 2 && window.innerHeight < 650) {
-      cartItemsContainer.style.overflow = "auto";
-      cartItemsContainer.style.maxHeight = "50px";
+      cartItemsContainer.style.maxHeight = "500px";
     }
   }
 });
@@ -526,6 +540,7 @@ checkoutBtn.addEventListener("click", () => {
   inputCidade.disabled = false;
   modal.style.display = "none";
   body.classList.remove('overflow-hidden');
+  btnProdutos.classList.add('hidden');
   updateCartModal();
   buscarCep();
 });

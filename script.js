@@ -6,12 +6,17 @@ const cartItemsContainer = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
 const cartCounter = document.getElementById("cart-count");
 const nameInput = document.getElementById("name-input");
+const telInput = document.getElementById("tel-input");
+const inputRadioRetirar = document.getElementById("opcao1")
+const inputRadioEntrega = document.getElementById("opcao2")
+const enderecoDiv = document.getElementById("endereco-div");
 const inputCep = document.getElementById("inputCep");
 const inputRua = document.getElementById("inputRua");
 const inputBairro = document.getElementById("inputBairro");
 const inputCidade = document.getElementById("inputCidade")
 const inputNumero = document.getElementById("inputNumero");
 const checkoutBtn = document.getElementById("checkout-btn");
+const paymentMethod = document.getElementById("paymentMethod");
 
 let cart = [];
 
@@ -34,6 +39,34 @@ modal.addEventListener("click", function (event) {
   }
 });
 
+//QUANDO O INPUT DE ENTREGA ESTIVER CHECKED
+inputRadioEntrega.addEventListener("change", () => {
+  if (inputRadioEntrega.checked) {
+    enderecoDiv.classList.remove('hidden');
+  }
+})
+
+//QUANDO O INPUT DE RETIRADA ESTIVER CHECKED
+inputRadioRetirar.addEventListener("change", () => {
+  if (inputRadioRetirar.checked) {
+    enderecoDiv.classList.add('hidden');
+  }
+})
+
+//FORMATAR INPUT NUMERO DE TELEFONE
+telInput.addEventListener("input", () => {
+  let numeroLimpo = telInput.value.replace(/\D/g, '');
+
+  // Verifica se o número possui 11 dígitos (incluindo o DDD)
+  if (numeroLimpo.length === 11) {
+    // Formata o número de telefone como (99) 99999-9999
+    telInput.value = `(${numeroLimpo.substring(0, 2)}) ${numeroLimpo.substring(2, 7)}-${numeroLimpo.substring(7, 11)}`;
+  } else {
+    // Caso contrário, deixa o número sem formatação
+    telInput.value = numeroLimpo;
+  }
+})
+
 // QUANDO EU CLICAR NO CARRINHO
 menu.addEventListener("click", function (event) {
   let parentButton = event.target.closest(".add-to-cart-btn");
@@ -42,18 +75,16 @@ menu.addEventListener("click", function (event) {
     const name = parentButton.getAttribute("data-name");
     const price = parseFloat(parentButton.getAttribute("data-price"));
 
+    if (cart.length >= 3 && window.innerWidth > 1068) {
+      cartItemsContainer.style.overflow = "auto";
+      cartItemsContainer.style.maxHeight = "300px";
+    } else if (cart.length >= 2 && window.innerWidth < 680) {
+      cartItemsContainer.style.overflow = "auto";
+      cartItemsContainer.style.maxHeight = "220px";
+    }
+
     //Adicionar no carrinho
     addToCart(name, price);
-
-    if (cart.length >= 2 && window.innerWidth <= 400) {
-      cartItemsContainer.style.overflow = "auto";
-      cartItemsContainer.style.maxHeight = "120px";
-    }
-
-    if (cart.length >= 5 && window.innerWidth > 1068) {
-      cartItemsContainer.style.overflow = "auto";
-      cartItemsContainer.style.maxHeight = "400px";
-    }
   }
 });
 
@@ -193,6 +224,7 @@ inputCep.addEventListener("blur", buscarCep);
 
 //QUANDO CLICA NO BOTÃO DE COMPLETAR A COMPRA
 checkoutBtn.addEventListener("click", () => {
+
   if (cart.length === 0) {
     Toastify({
       text: "Por favor, adicione itens no carrinho!",
@@ -223,7 +255,7 @@ checkoutBtn.addEventListener("click", () => {
     return;
   }
 
-  if (inputRua.value === "") {
+  if (telInput.value === "") {
     Toastify({
       text: "Por favor, preencha todos os campos!",
       duration: 3000,
@@ -238,77 +270,154 @@ checkoutBtn.addEventListener("click", () => {
     return;
   }
 
-  if (inputBairro.value === "") {
-    Toastify({
-      text: "Por favor, preencha todos os campos!",
-      duration: 3000,
-      close: true,
-      gravity: "top",
-      position: "right",
-      stopOnFocus: true,
-      style: {
-        background: "#ef4444",
-      },
-    }).showToast();
-    return;
+  if (inputRadioRetirar.checked) {
+    //ENVIAR PEDIDO PARA WHATSAPP
+    const cartItems = cart
+      .map((item) => {
+        return `${item.name}\nQuantidade: (${item.quantity})\n\n`;
+      })
+      .join("");
+
+    function totalPedido() {
+      let total = 0;
+      cart.forEach((element) => {
+        total += element.price * element.quantity;
+      });
+      return total;
+    }
+    let total = totalPedido();
+    const message = encodeURIComponent(cartItems);
+    const phone = "+5587981772959";
+    const data = new Date();
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const ano = data.getFullYear();
+    const hora = data.getHours();
+    const minutos = data.getMinutes()
+    const dataAtual = `${dia}/${mes}/${ano} ${hora}:${minutos}`
+
+    window.open(
+      `https://wa.me/${phone}?text=Novo Pedido%0A%0APedido feito em: ${dataAtual}%0A%0A${message}Nome do cliente: ${nameInput.value
+      }%0ATelefone: ${telInput.value}%0AValor total do pedido: R$ ${total.toFixed(2)}%0AMétodo de pagamento: ${paymentMethod.value}%0ARetirar na loja`,
+      "_blank"
+    );
+
+    nameInput.value = "";
+    telInput.value = "";
   }
 
-  if (inputCidade.value === "") {
-    Toastify({
-      text: "Por favor, preencha todos os campos!",
-      duration: 3000,
-      close: true,
-      gravity: "top",
-      position: "right",
-      stopOnFocus: true,
-      style: {
-        background: "#ef4444",
-      },
-    }).showToast();
-    return;
+  if (inputRadioEntrega.checked) {
+
+    if (inputCep.value === "") {
+      Toastify({
+        text: "Por favor, preencha todos os campos!",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#ef4444",
+        },
+      }).showToast();
+      return;
+    }
+
+    if (inputRua.value === "") {
+      Toastify({
+        text: "Por favor, preencha todos os campos!",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#ef4444",
+        },
+      }).showToast();
+      return;
+    }
+
+    if (inputBairro.value === "") {
+      Toastify({
+        text: "Por favor, preencha todos os campos!",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#ef4444",
+        },
+      }).showToast();
+      return;
+    }
+
+    if (inputCidade.value === "") {
+      Toastify({
+        text: "Por favor, preencha todos os campos!",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#ef4444",
+        },
+      }).showToast();
+      return;
+    }
+
+    if (inputNumero.value === "") {
+      Toastify({
+        text: "Por favor, preencha todos os campos!",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#ef4444",
+        },
+      }).showToast();
+      return;
+    }
+
+    //ENVIAR PEDIDO PARA WHATSAPP
+    const cartItems = cart
+      .map((item) => {
+        return `${item.name}\nQuantidade: (${item.quantity})\n\n`;
+      })
+      .join("");
+
+    function totalPedido() {
+      let total = 0;
+      cart.forEach((element) => {
+        total += element.price * element.quantity;
+      });
+      return total;
+    }
+    let total = totalPedido();
+    const message = encodeURIComponent(cartItems);
+    const phone = "+5587981772959";
+    const data = new Date();
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const ano = data.getFullYear();
+    const hora = data.getHours();
+    const minutos = data.getMinutes()
+    const dataAtual = `${dia}/${mes}/${ano} ${hora}:${minutos}`
+
+    window.open(
+      `https://wa.me/${phone}?text=Novo Pedido%0A%0APedido feito em: ${dataAtual}%0A%0A${message}Nome do cliente: ${nameInput.value
+      }%0ATelefone: ${telInput.value}%0AEndereço: ${inputRua.value} | Bairro: ${inputBairro.value} | Número: ${inputNumero.value}%0AValor total do pedido: R$ ${total.toFixed(2)}%0AMétodo de pagamento: ${paymentMethod.value}`,
+      "_blank"
+    );
   }
-
-  if (inputNumero.value === "") {
-    Toastify({
-      text: "Por favor, preencha todos os campos!",
-      duration: 3000,
-      close: true,
-      gravity: "top",
-      position: "right",
-      stopOnFocus: true,
-      style: {
-        background: "#ef4444",
-      },
-    }).showToast();
-    return;
-  }
-
-  //ENVIAR PEDIDO PARA WHATSAPP
-  const cartItems = cart
-    .map((item) => {
-      return `${item.name}\nQuantidade: (${item.quantity})\n\n`;
-    })
-    .join("");
-
-  function totalPedido() {
-    let total = 0;
-    cart.forEach((element) => {
-      total += element.price * element.quantity;
-    });
-    return total;
-  }
-  let total = totalPedido();
-  const message = encodeURIComponent(cartItems);
-  const phone = "+5587981772959";
-
-  window.open(
-    `https://wa.me/${phone}?text=${message}Nome do cliente: ${nameInput.value
-    }%0AEndereço: ${inputRua.value} | Bairro: ${inputBairro.value} ${inputCidade.value} | Número: ${inputNumero.value}%0AValor total do pedido: R$ ${total.toFixed(2)}`,
-    "_blank"
-  );
 
   cart = [];
   nameInput.value = "";
+  telInput.value = "";
   inputCep.value = "";
   inputRua.value = "";
   inputBairro.value = "";

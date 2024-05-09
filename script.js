@@ -28,12 +28,13 @@ let cart = [];
 cartBtn.addEventListener("click", () => {
   updateCartModal();
   modal.style.display = "flex";
-  body.style.overflow = "hidden";
+  body.classList.add('overflow-hidden');
 });
 
 //FECHAR MODAL AO CLICAR NO BOTÃO FECHAR
 closeModalBtn.addEventListener("click", () => {
   modal.style.display = "none";
+  body.classList.remove('overflow-hidden');
   updateCartModal();
 });
 
@@ -41,13 +42,13 @@ closeModalBtn.addEventListener("click", () => {
 modal.addEventListener("click", function (event) {
   if (event.target === modal) {
     modal.style.display = "none";
+    body.classList.remove('overflow-hidden');
   }
 });
 
 //QUANDO CLICAR NO BOTAO DE ADICIONAR ENDEREÇO NO MOBILE
 entregaBtnMobile.addEventListener("click", () => {
   modalMobile.style.display = "flex";
-  body.style.overflow = "hidden";
 })
 
 //FECHAR MODAL AO CLICAR FORA MOBILE
@@ -134,7 +135,7 @@ btnMobileEntrega.addEventListener("click", () => {
     return;
   }
 
-  modalMobile.style.display = "none";
+  modalMobile.style.display = 'none';
 })
 
 //QUANDO O INPUT DE ENTREGA ESTIVER CHECKED E A TELA MAIOR QUE 680 PX
@@ -263,7 +264,6 @@ cartItemsContainer.addEventListener("click", (event) => {
     removeCartItem(name);
   }
 });
-
 function removeCartItem(name) {
   const index = cart.findIndex((item) => item.name === name);
 

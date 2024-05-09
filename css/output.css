@@ -926,8 +926,16 @@ video {
   width: 100%;
 }
 
-.w-\[95px\] {
-  width: 95px;
+.w-\[86px\] {
+  width: 86px;
+}
+
+.w-\[86\.6px\] {
+  width: 86.6px;
+}
+
+.w-\[86\.60px\] {
+  width: 86.60px;
 }
 
 .min-w-\[90\%\] {

@@ -201,6 +201,10 @@ menu.addEventListener("click", function (event) {
       cartItemsContainer.style.overflow = "auto";
       cartItemsContainer.style.maxHeight = "500px";
     }
+    if(cart.length >= 8 && window.innerHeight > 900) {
+      cartItemsContainer.style.overflow = "auto";
+      cartItemsContainer.style.maxHeight = "600px";
+    }
   }
 });
 

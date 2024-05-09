@@ -191,9 +191,6 @@ menu.addEventListener("click", function (event) {
       cartItemsContainer.style.overflow = "auto";
       cartItemsContainer.style.maxHeight = "220px";
     }
-    if (window.innerWidth < 640) {
-
-    }
   }
 });
 

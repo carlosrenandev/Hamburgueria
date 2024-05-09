@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 const menu = document.getElementById("menu");
 const cartBtn = document.getElementById("cart-btn");
 const modal = document.getElementById("cart-modal");
@@ -27,6 +28,7 @@ let cart = [];
 cartBtn.addEventListener("click", () => {
   updateCartModal();
   modal.style.display = "flex";
+  body.style.overflow = "hidden";
 });
 
 //FECHAR MODAL AO CLICAR NO BOTÃO FECHAR
@@ -42,16 +44,20 @@ modal.addEventListener("click", function (event) {
   }
 });
 
+//QUANDO CLICAR NO BOTAO DE ADICIONAR ENDEREÇO NO MOBILE
+entregaBtnMobile.addEventListener("click", () => {
+  modalMobile.style.display = "flex";
+  body.style.overflow = "hidden";
+})
+
+//FECHAR MODAL AO CLICAR FORA MOBILE
 modalMobile.addEventListener("click", function (event) {
   if (event.target === modalMobile) {
     modalMobile.style.display = "none";
   }
 });
 
-entregaBtnMobile.addEventListener("click", () => {
-  modalMobile.style.display = "flex";
-})
-
+//QUANDO CLICAR PARA CONFIRMAR ENREDEÇO MOBILE
 btnMobileEntrega.addEventListener("click", () => {
   if (inputCep.value === "") {
     Toastify({

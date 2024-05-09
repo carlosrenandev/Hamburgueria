@@ -544,7 +544,6 @@ checkoutBtn.addEventListener("click", () => {
   inputCidade.disabled = false;
   modal.style.display = "none";
   body.classList.remove('overflow-hidden');
-  btnProdutos.classList.add('hidden');
   updateCartModal();
   buscarCep();
 });

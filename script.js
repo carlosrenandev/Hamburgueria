@@ -78,11 +78,11 @@ menu.addEventListener("click", function (event) {
     //Adicionar no carrinho
     addToCart(name, price);
 
-    if(cart.length >= 2 && window.innerWidth < 1000) {
+    if (cart.length >= 2 && window.innerWidth < 640) {
       cartItemsContainer.style.overflow = "auto";
       cartItemsContainer.style.maxHeight = "100px";
     }
-    if (cart.length >= 4 && window.innerWidth > 1000) {
+    if (cart.length >= 4 && window.innerWidth > 640) {
       cartItemsContainer.style.overflow = "auto";
       cartItemsContainer.style.maxHeight = "220px";
     }

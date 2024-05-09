@@ -75,16 +75,17 @@ menu.addEventListener("click", function (event) {
     const name = parentButton.getAttribute("data-name");
     const price = parseFloat(parentButton.getAttribute("data-price"));
 
-    if (cart.length >= 3 && window.innerWidth > 1068) {
-      cartItemsContainer.style.overflow = "auto";
-      cartItemsContainer.style.maxHeight = "300px";
-    } else if (cart.length >= 2 && window.innerWidth < 680) {
+    //Adicionar no carrinho
+    addToCart(name, price);
+
+    if(cart.length >= 2 && window.innerWidth < 1000) {
       cartItemsContainer.style.overflow = "auto";
       cartItemsContainer.style.maxHeight = "100px";
     }
-
-    //Adicionar no carrinho
-    addToCart(name, price);
+    if (cart.length >= 4 && window.innerWidth > 1000) {
+      cartItemsContainer.style.overflow = "auto";
+      cartItemsContainer.style.maxHeight = "220px";
+    }
   }
 });
 

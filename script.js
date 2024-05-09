@@ -147,6 +147,7 @@ inputRadioEntrega.addEventListener("change", () => {
 inputRadioRetirar.addEventListener("change", () => {
   if (inputRadioRetirar.checked) {
     enderecoDiv.classList.add('hidden');
+    entregaBtnMobile.classList.add('hidden')
   }
 })
 
@@ -177,7 +178,7 @@ menu.addEventListener("click", function (event) {
 
     if (cart.length >= 2 && window.innerWidth < 640) {
       cartItemsContainer.style.overflow = "auto";
-      cartItemsContainer.style.maxHeight = "220px";
+      cartItemsContainer.style.maxHeight = "200px";
     }
     if (cart.length >= 4 && window.innerWidth > 640) {
       cartItemsContainer.style.overflow = "auto";

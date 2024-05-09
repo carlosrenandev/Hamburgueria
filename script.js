@@ -406,7 +406,7 @@ checkoutBtn.addEventListener("click", () => {
     }
     let total = totalPedido();
     const message = encodeURIComponent(cartItems);
-    const phone = "+5587981772959";
+    const phone = "+558791166845";
     const data = new Date();
     const dia = String(data.getDate()).padStart(2, '0');
     const mes = String(data.getMonth() + 1).padStart(2, '0');
@@ -515,7 +515,7 @@ checkoutBtn.addEventListener("click", () => {
     }
     let total = totalPedido();
     const message = encodeURIComponent(cartItems);
-    const phone = "+5587981772959";
+    const phone = "+558791166845";
     const data = new Date();
     const dia = String(data.getDate()).padStart(2, '0');
     const mes = String(data.getMonth() + 1).padStart(2, '0');

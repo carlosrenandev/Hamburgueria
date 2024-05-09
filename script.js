@@ -8,16 +8,14 @@ const cartTotal = document.getElementById("cart-total");
 const cartCounter = document.getElementById("cart-count");
 const nameInput = document.getElementById("name-input");
 const telInput = document.getElementById("tel-input");
+const inputCep = document.getElementById('inputCep')
+const inputBairro = document.getElementById('inputBairro')
+const inputCidade = document.getElementById('inputCidade')
+const inputNumero = document.getElementById('inputNumero')
 const inputRadioRetirar = document.getElementById("opcao1")
 const inputRadioEntrega = document.getElementById("opcao2")
-const enderecoDiv = document.getElementById("endereco-div");
-const inputCep = document.getElementById("inputCep");
-const inputRua = document.getElementById("inputRua");
-const inputBairro = document.getElementById("inputBairro");
-const inputCidade = document.getElementById("inputCidade")
-const inputNumero = document.getElementById("inputNumero");
-const checkoutBtn = document.getElementById("checkout-btn");
 const paymentMethod = document.getElementById("paymentMethod");
+const checkoutBtn = document.getElementById("checkout-btn");
 const entregaBtnMobile = document.getElementById("entregaBtn");
 const modalMobile = document.getElementById("modalMobile");
 const btnMobileEntrega = document.getElementById("btnMobileEntrega");
@@ -46,17 +44,17 @@ modal.addEventListener("click", function (event) {
   }
 });
 
+//QUANDO O INPUT DE ENTREGA ESTIVER CHECKED
+inputRadioEntrega.addEventListener("change", () => {
+  if (inputRadioEntrega.checked) {
+    entregaBtnMobile.classList.remove('hidden');
+  }
+})
+
 //QUANDO CLICAR NO BOTAO DE ADICIONAR ENDEREÇO NO MOBILE
 entregaBtnMobile.addEventListener("click", () => {
   modalMobile.style.display = "flex";
 })
-
-//FECHAR MODAL AO CLICAR FORA MOBILE
-modalMobile.addEventListener("click", function (event) {
-  if (event.target === modalMobile) {
-    modalMobile.style.display = "none";
-  }
-});
 
 //QUANDO CLICAR PARA CONFIRMAR ENREDEÇO MOBILE
 btnMobileEntrega.addEventListener("click", () => {
@@ -138,22 +136,16 @@ btnMobileEntrega.addEventListener("click", () => {
   modalMobile.style.display = 'none';
 })
 
-//QUANDO O INPUT DE ENTREGA ESTIVER CHECKED E A TELA MAIOR QUE 680 PX
-inputRadioEntrega.addEventListener("change", () => {
-  if (inputRadioEntrega.checked && window.innerWidth < 680) {
-    entregaBtnMobile.classList.remove('hidden');
-    enderecoDiv.classList.add('hidden');
+//FECHAR MODAL AO CLICAR FORA MOBILE
+modalMobile.addEventListener("click", function (event) {
+  if (event.target === modalMobile) {
+    modalMobile.style.display = "none";
   }
-  if (inputRadioEntrega.checked && window.innerWidth > 680) {
-    enderecoDiv.classList.remove('hidden');
-    entregaBtnMobile.classList.add('hidden');
-  }
-})
+});
 
 //QUANDO O INPUT DE RETIRADA ESTIVER CHECKED
 inputRadioRetirar.addEventListener("change", () => {
   if (inputRadioRetirar.checked) {
-    enderecoDiv.classList.add('hidden');
     entregaBtnMobile.classList.add('hidden')
   }
 })
@@ -183,13 +175,13 @@ menu.addEventListener("click", function (event) {
     //Adicionar no carrinho
     addToCart(name, price);
 
-    if (cart.length >= 2 && window.innerWidth < 640) {
+    if (cart.length >= 2 && window.innerHeight < 900) {
       cartItemsContainer.style.overflow = "auto";
       cartItemsContainer.style.maxHeight = "200px";
     }
-    if (cart.length >= 4 && window.innerWidth > 640) {
+    if (cart.length >= 4 && window.innerHeight > 900) {
       cartItemsContainer.style.overflow = "auto";
-      cartItemsContainer.style.maxHeight = "220px";
+      cartItemsContainer.style.maxHeight = "300px";
     }
   }
 });
@@ -402,13 +394,10 @@ checkoutBtn.addEventListener("click", () => {
     const dataAtual = `${dia}/${mes}/${ano} ${hora}:${minutos}`
 
     window.open(
-      `https://wa.me/${phone}?text=Novo Pedido%0A%0APedido feito em: ${dataAtual}%0A%0A${message}Nome do cliente: ${nameInput.value
-      }%0ATelefone: ${telInput.value}%0AValor total do pedido: R$ ${total.toFixed(2)}%0AMétodo de pagamento: ${paymentMethod.value}%0ARetirar na loja`,
+      `https://wa.me/${phone}?text=Novo Pedido - Para retirar na hambúrgueria%0A%0APedido feito em: ${dataAtual}%0A%0A${message}Nome do cliente: ${nameInput.value
+      }%0ATelefone: ${telInput.value}%0AValor total do pedido: R$ ${total.toFixed(2)}%0AMétodo de pagamento: ${paymentMethod.value}`,
       "_blank"
     );
-
-    nameInput.value = "";
-    telInput.value = "";
   }
 
   if (inputRadioEntrega.checked) {
